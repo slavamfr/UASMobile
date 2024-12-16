@@ -7,6 +7,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.faiz.uas.database.AppDatabase
+import com.faiz.uas.model.User
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -37,14 +41,11 @@ class RegisterActivity : AppCompatActivity() {
             if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
                 Toast.makeText(this, "Semua kolom harus diisi!", Toast.LENGTH_SHORT).show()
             } else {
-                // Save user data to SharedPreferences
-                val sharedPreferences = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
-                editor.putString("USERNAME", username)
-                editor.putString("PASSWORD", password)
-                editor.putString("EMAIL", email)
-                editor.putString("PHONE", phone)
-                editor.apply()
+                // Save user data to database
+                val user = User(username, password, email, phone)
+                GlobalScope.launch {
+                    AppDatabase.getDatabase(this@RegisterActivity).userDao().insert(user)
+                }
 
                 Toast.makeText(this, "Registrasi berhasil!", Toast.LENGTH_SHORT).show()
 

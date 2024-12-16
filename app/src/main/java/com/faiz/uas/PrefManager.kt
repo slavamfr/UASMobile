@@ -9,35 +9,43 @@ class PrefManager(context: Context) {
         context.getSharedPreferences("USER_PREFS", Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
-    // Simpan data string
-    fun saveString(key: String, value: String) {
-        editor.putString(key, value)
+    // Save user data
+    fun saveUserData(username: String, email: String, phone: String) {
+        editor.putString("USERNAME_$username", username)
+        editor.putString("EMAIL_$username", email)
+        editor.putString("PHONE_$username", phone)
         editor.apply()
     }
 
-    // Ambil data string
-    fun getString(key: String, defaultValue: String = ""): String {
-        return sharedPreferences.getString(key, defaultValue) ?: defaultValue
+    // Get user data
+    fun getUserData(username: String): Map<String, String?> {
+        return mapOf(
+            "USERNAME" to sharedPreferences.getString("USERNAME_$username", null),
+            "EMAIL" to sharedPreferences.getString("EMAIL_$username", null),
+            "PHONE" to sharedPreferences.getString("PHONE_$username", null)
+        )
     }
 
-    // Simpan data boolean
-    fun saveBoolean(key: String, value: Boolean) {
-        editor.putBoolean(key, value)
+    // Set active user
+    fun setActiveUser(username: String) {
+        editor.putString("ACTIVE_USER", username)
         editor.apply()
     }
 
-    // Ambil data boolean
-    fun getBoolean(key: String, defaultValue: Boolean = false): Boolean {
-        return sharedPreferences.getBoolean(key, defaultValue)
+    // Get active user
+    fun getActiveUser(): String? {
+        return sharedPreferences.getString("ACTIVE_USER", null)
     }
 
-    // Hapus data tertentu
-    fun remove(key: String) {
-        editor.remove(key)
+    // Remove user data
+    fun clearUserData(username: String) {
+        editor.remove("USERNAME_$username")
+        editor.remove("EMAIL_$username")
+        editor.remove("PHONE_$username")
         editor.apply()
     }
 
-    // Hapus semua data
+    // Clear all data
     fun clear() {
         editor.clear()
         editor.apply()

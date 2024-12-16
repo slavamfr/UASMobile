@@ -9,23 +9,23 @@ import com.faiz.uas.databinding.ActivityProfileBinding
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
+    private lateinit var prefManager: PrefManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Retrieve user data from SharedPreferences
-        val sharedPreferences = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE)
-        val username = sharedPreferences.getString("USERNAME", "User")
-        val email = sharedPreferences.getString("EMAIL", "email@example.com")
-        val phone = sharedPreferences.getString("PHONE", "081234567890")
+        prefManager = PrefManager(this)
 
-        // Display user data in TextView
-        binding.txtUserNameProfile.text = username
-        binding.txtProfileUserName.text = username
-        binding.txtProfileEmail.text = email
-        binding.txtProfilePhone.text = phone
+        val activeUser = prefManager.getActiveUser()
+        if (activeUser != null) {
+            val userData = prefManager.getUserData(activeUser)
+            binding.txtUserNameProfile.text = userData["USERNAME"]
+            binding.txtProfileUserName.text = userData["USERNAME"]
+            binding.txtProfileEmail.text = userData["EMAIL"]
+            binding.txtProfilePhone.text = userData["PHONE"]
+        }
 
         setupBottomNavigation()
         setupLogoutButton()
@@ -55,7 +55,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnLogout.setOnClickListener {
             val sharedPreferences = getSharedPreferences("USER_DATA", MODE_PRIVATE)
             val editor = sharedPreferences.edit()
-            editor.clear()
+            editor.remove("IS_LOGGED_IN")
             editor.apply()
 
             val intent = Intent(this, LoginActivity::class.java)

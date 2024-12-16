@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.faiz.uas.model.User
 
-@Database(entities = [Bookmark::class], version = 2)
+@Database(entities = [Bookmark::class, User::class], version = 3) // Increment the version number
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bookmarkDao(): BookmarkDao
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile
@@ -20,7 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "app_database"
                 )
-                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration() // Allow destructive migrations
                     .build()
                 INSTANCE = instance
                 instance

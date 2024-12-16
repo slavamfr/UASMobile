@@ -19,6 +19,7 @@ roomKtx = "2.6.1"
 roomCompiler = "2.6.1"
 navigation = "2.8.3"
 gridlayout = "1.0.0"
+firebaseFirestoreKtx = "25.1.1"
 
 
 [libraries]
@@ -43,6 +44,7 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 navigation-fragment = {group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation"}
 navigation-ui =  {group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation"}
 androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

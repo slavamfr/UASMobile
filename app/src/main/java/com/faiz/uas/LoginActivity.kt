@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.faiz.uas.admin.AdminHomeActivity
+import com.faiz.uas.database.AppDatabase
 import com.faiz.uas.databinding.ActivityLoginBinding
+import kotlinx.coroutines.runBlocking
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,27 +31,22 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 // Check admin credentials
                 if (username == "admin" && password == "admin1234") {
-                    // Navigate to AdminHomeActivity
                     val intent = Intent(this, AdminHomeActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
-                    // Check user credentials
-                    val sharedPreferences = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE)
-                    val savedUsername = sharedPreferences.getString("USERNAME", "")
-                    val savedPassword = sharedPreferences.getString("PASSWORD", "")
+                    runBlocking {
+                        val user = AppDatabase.getDatabase(this@LoginActivity).userDao().getUserByUsername(username)
+                        if (user != null && user.password == password) {
+                            prefManager.saveUserData(user.username, user.email, user.phone)
+                            prefManager.setActiveUser(user.username)
 
-                    if (username == savedUsername && password == savedPassword) {
-                        // Save login state
-                        prefManager.saveBoolean("IS_LOGGED_IN", true)
-                        prefManager.saveString("LOGGED_IN_USER", username)
-
-                        // Navigate to MainActivity
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(this, "Invalid Username or Password", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(this@LoginActivity, "Invalid Username or Password", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
