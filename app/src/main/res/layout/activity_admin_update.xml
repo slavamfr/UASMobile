@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    tools:context=".admin.AdminUpdateActivity">
+
+    <LinearLayout
+        android:id="@+id/headerupdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        android:background="@color/birutua">
+
+        <ImageView
+            android:id="@+id/action_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_arrowback"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Comic"
+            android:layout_marginStart="65dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:fontFamily="@font/poppins_bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerupdate"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/background2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="15dp">
+
+            <TextView
+                android:id="@+id/title_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
+                android:text="Form Update Comic"
+                android:textSize="24sp"
+                android:layout_marginBottom="50dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_edittext2"
+                android:paddingHorizontal="12dp"
+                android:layout_marginVertical="10dp">
+
+                <EditText
+                    android:id="@+id/et_comic_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Comic Title"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@android:color/transparent"
+                    android:padding="8dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_edittext2"
+                android:paddingHorizontal="12dp"
+                android:layout_marginVertical="10dp">
+
+                <EditText
+                    android:id="@+id/et_comic_genre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Comic Genre"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@android:color/transparent"
+                    android:padding="8dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_edittext2"
+                android:paddingHorizontal="12dp"
+                android:layout_marginVertical="10dp">
+
+                <EditText
+                    android:id="@+id/et_comic_author"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Comic Author"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@android:color/transparent"
+                    android:padding="8dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_edittext2"
+                android:paddingHorizontal="12dp"
+                android:layout_marginVertical="10dp">
+
+                <EditText
+                    android:id="@+id/et_comic_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Comic Description"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@android:color/transparent"
+                    android:padding="8dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_edittext2"
+                android:paddingHorizontal="12dp"
+                android:layout_marginVertical="10dp">
+
+                <EditText
+                    android:id="@+id/et_comic_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Comic Image URL"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@android:color/transparent"
+                    android:padding="8dp"/>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_update_comic"
+                style="@style/CustomRoundedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Update Comic"
+                android:textSize="14sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
